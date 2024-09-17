@@ -107,6 +107,10 @@ hmac_key_label = "vault-hsm-hmac-key"
 generate_key   = "true"
 }
 
+entropy "seal" {
+    mode = "augmentation"
+}
+
 EOF
 
     sudo chown -R vault:vault /etc/vault.d/*
