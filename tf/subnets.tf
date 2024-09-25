@@ -4,6 +4,18 @@ resource "aws_subnet" "vault-softhsm-subnet" {
   availability_zone = "eu-central-1a"
 }
 
+resource "aws_subnet" "vault-softhsm-subnet" {
+  cidr_block        = cidrsubnet(aws_vpc.vault-softhsm-vpc.cidr_block, 3, 1)
+  vpc_id            = aws_vpc.vault-softhsm-vpc.id
+  availability_zone = "eu-central-1b"
+}
+
+resource "aws_subnet" "vault-softhsm-subnet" {
+  cidr_block        = cidrsubnet(aws_vpc.vault-softhsm-vpc.cidr_block, 3, 1)
+  vpc_id            = aws_vpc.vault-softhsm-vpc.id
+  availability_zone = "eu-central-1c"
+}
+
 resource "aws_route_table" "vault-softhsm-rtb" {
   vpc_id = aws_vpc.vault-softhsm-vpc.id
   route {
