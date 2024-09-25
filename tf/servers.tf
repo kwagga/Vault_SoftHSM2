@@ -6,6 +6,6 @@ resource "aws_instance" "vault-softhsm" {
   tags = {
     Name = "${random_pet.name.id}"
   }
-  subnet_id = aws_subnet.vault-softhsm-subnet.id
+  subnet_id = aws_subnet.vault-softhsm-subnet-1.id
 
 }
