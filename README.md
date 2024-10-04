@@ -13,7 +13,7 @@ Please do not use this for production employments. This is for lab/testing/demon
 - An x86_64 Ubuntu VM (VirtualBox, AWS, gcloud, etc) - Testing was done on Jammy Jellyfish - see the [tf](https://github.com/kwagga/Vault_SoftHSM2/tree/main/tf) folder for a sandbox
 - Bash shell
 - [Vault Enterprise License](https://www.vaultproject.io/docs/enterprise/license) (HSM support is only available for Vault Enterprise)
-- Vault 1.17.1 Enterprise HSM now supports ARM. See [tf_arm](https://github.com/kwagga/Vault_SoftHSM2/tree/main/t_arm) for an ARM sandbox based on Noble Numbat
+- Vault 1.17.1 Enterprise HSM now supports ARM. See [tf_arm](https://github.com/kwagga/Vault_SoftHSM2/tree/main/tf_arm) for an ARM sandbox based on Noble Numbat
 
 # Usage
 ## Clone the repo
