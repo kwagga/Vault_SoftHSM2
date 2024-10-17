@@ -19,7 +19,7 @@ install_and_config() {
     echo_green "Installing SoftHSM2 and Vault Enterprise with HSM support..."
     curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
     sudo apt-add-repository -y "deb https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-    sudo apt-get install -qq vault-enterprise-hsm softhsm2 opensc
+    sudo apt-get install -qq vault-enterprise-hsm softhsm2 opensc p11-kit
     sudo systemctl enable vault.service
     read -p "Press any key to continue... " -n1 -s
 
@@ -78,6 +78,8 @@ install_and_config() {
     echo_green "Adding license ..."
     sudo cp `pwd`/vault.hclic /etc/vault.d/vault.hclic
     echo "VAULT_LICENSE_PATH=/etc/vault.d/vault.hclic" | sudo tee -a /etc/vault.d/vault.env
+    echo "PKCS11SPY=/usr/lib/softhsm/libsofthsm2.so" | sudo tee -a /etc/vault.d/vault.env
+    echo "LD_PRELOAD=/usr/lib/x86_64-linux-gnu/pkcs11-spy.so" | sudo tee -a /etc/vault.d/vault.env
 
     # Setup Vault config for HSM etc...
     clear
@@ -99,7 +101,9 @@ tls_disable = 1
 }
 
 seal "pkcs11" {
-lib            = "/usr/lib/softhsm/libsofthsm2.so"
+#lib            = "/usr/lib/softhsm/libsofthsm2.so"
+## Added pkcs11-spy so we can read the pkcs11 functions from the vault operational log.
+lib            = "/usr/lib/x86_64-linux-gnu/pkcs11-spy.so"
 slot           = "${VAULT_HSM_SLOT}"
 pin            = "1234"
 key_label      = "vault-hsm-key"
