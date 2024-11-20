@@ -140,6 +140,13 @@ EOF
         echo_red "Vault is not running!"
         exit 1
     fi
+    
+ # List the keys Vault generated
+    echo_green "Listing Vault unseal keys stored in the SoftHSM slot using pkcs#11"
+    echo "sudo pkcs11-tool --module /usr/lib/softhsm/libsofthsm2.so --slot $VAULT_HSM_SLOT --list-objects --login --pin 1234"
+    sudo sudo pkcs11-tool --module /usr/lib/softhsm/libsofthsm2.so --slot $VAULT_HSM_SLOT --list-objects --login --pin 1234
+    read -p "Press any key to continue... " -n1 -s
+
 }
 
 # First check whether the Vault Enterprise license file exists, break if it is missing otherwise install.
