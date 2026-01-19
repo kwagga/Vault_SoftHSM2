@@ -9,5 +9,4 @@ resource "aws_vpc" "vault-softhsm-vpc" {
 
 resource "aws_eip" "ip-vault-softhsm" {
   instance = aws_instance.vault-softhsm.id
-  vpc      = true
 }
